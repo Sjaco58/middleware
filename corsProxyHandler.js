@@ -15,8 +15,17 @@ module.exports = {
 
         const apiUrl = params.apiUrl;
 
+        const queryParams = Object.keys(params).reduce(function(acc, paramKey) {
+            if(paramKey !== 'apiUrl') {
+                acc.push(`${paramKey}=${params[paramKey]}`);
+            }
+            return acc;
+        }, []);
+
+        const fullApiUrl = queryParams.length ? `${apiUrl}?${queryParams.join('&')}` : apiUrl;
+
         try {
-            const proxiedResponse = await fetch(apiUrl, {
+            const proxiedResponse = await fetch(fullApiUrl, {
                 mode: 'cors',
                 headers: {
                     'Accept': 'application/json'
