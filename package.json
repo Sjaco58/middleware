@@ -1,12 +1,12 @@
 {
-  "name": "katiemiddleware",
+  "name": "sammiddleware",
   "version": "1.0.0",
-  "description": "Generic middleware solution for Katie's projects",
+  "description": "Generic middleware solution for Sam's projects",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Katie Boland",
+  "author": "Samuel Jacobi",
   "license": "ISC",
   "dependencies": {
     "fetch": "^1.1.0",
