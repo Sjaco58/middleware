@@ -11,12 +11,30 @@ module.exports = {
      */
 
     simpleCorsProxy: async (request, h) => {
-        const params = request.query;
+        const query = request.query;
+        const apiUrl = query.apiUrl;
 
-        const apiUrl = params.apiUrl;
+        var keys = Object.keys(query);
+        var values = Object.values(query);
 
+        console.log(keys);
+
+        var queryParams = [];
+
+        for (var i = 0; i < keys.length; i++) {
+            if(keys[i] !== 'apiUrl') {
+                queryParams.push(keys[i] + '=' + values[i]);
+            }
+        }
+
+        if (queryParams.length === 0) {
+            fullApiUrl = apiUrl;
+        } else {
+            var fullApiUrl = apiUrl + '?' + queryParams.join('&');
+        }
+        console.log(fullApiUrl);
         try {
-            const proxiedResponse = await fetch(apiUrl, {
+            const proxiedResponse = await fetch(fullApiUrl, {
                 mode: 'cors',
                 headers: {
                     'Accept': 'application/json'
